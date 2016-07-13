@@ -2,6 +2,28 @@
 
 var Redux = require('redux');
 
+
+function reducer1(partialState, action){
+  switch (action.type) {
+    case 'ACTION_1':
+      return partialState + 1;
+    default:
+      return partialState;
+  }
+}
+
+
+function reducer2(partialState, action){
+  switch (action.type) {
+    case 'ACTION_2':
+      return partialState + action.foo;
+    default:
+      return partialState;
+  }
+}
+
+
+
 var store = Redux.createStore((state, action) => {
   if (! state){
     return { part1: 42, part2: 'a'};
@@ -10,14 +32,14 @@ var store = Redux.createStore((state, action) => {
   switch (action.type) {
     case 'ACTION_1':
       return {
-        part1 : state.part1 + 1,
+        part1 : reducer1(state.part1, action),
         part2 : state.part2
       };
 
     case 'ACTION_2':
       return {
         part1 : state.part1,
-        part2 : state.part2 + action.foo
+        part2 : reducer2(state.part2, action)
       };
     default:
       return state;
