@@ -29,22 +29,10 @@ var store = Redux.createStore((state, action) => {
     return { part1: 42, part2: 'a'};
   }
 
-  switch (action.type) {
-    case 'ACTION_1':
-      return {
-        part1 : reducer1(state.part1, action),
-        part2 : state.part2
-      };
-
-    case 'ACTION_2':
-      return {
-        part1 : state.part1,
-        part2 : reducer2(state.part2, action)
-      };
-    default:
-      return state;
-  }
-
+  return {
+    part1 : reducer1(state.part1, action),
+    part2 : reducer2(state.part2, action)
+  };
 });
 
 
